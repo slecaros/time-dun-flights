@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Controller } from '../../domain/interfaces/controller.interface';
+import { Controller } from '@domain/interfaces/controller.interface';
 
 export class FlightsController implements Controller {
   public execute(req: Request, res: Response): void {
