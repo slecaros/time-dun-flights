@@ -1,6 +1,6 @@
+import { Schema, model } from 'mongoose';
 import { Flight } from '../../domain/entities/flight.entity';
 import { Passenger } from '../../domain/entities/passenger.entity';
-import { Schema, model } from 'mongoose';
 
 const PassengerSchema = new Schema<Passenger>(
   {
@@ -12,7 +12,7 @@ const PassengerSchema = new Schema<Passenger>(
     reservationId: { type: String, required: true },
     hasCheckedBaggage: { type: Boolean, required: true },
   },
-  { _id: false, timestamps: false }
+  { _id: false, timestamps: false },
 );
 
 const FlightSchema = new Schema<Flight>(
@@ -20,7 +20,7 @@ const FlightSchema = new Schema<Flight>(
     flightCode: { type: String, required: true, unique: true },
     passengers: { type: [PassengerSchema], default: [] },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 FlightSchema.index({ flightCode: 1 }, { unique: true });

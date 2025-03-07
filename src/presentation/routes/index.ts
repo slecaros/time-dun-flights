@@ -6,4 +6,4 @@ const router = Router();
 // Flights routes
 router.use('/flights', flightsRoutes);
 
-export default router; 
+export default router;
