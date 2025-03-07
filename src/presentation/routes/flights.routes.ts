@@ -1,12 +1,11 @@
 import { Router } from 'express';
 import { FlightsController } from '../api/controllers/flights.controller';
 import { handler as createFlightHandler } from '../api/flights/create-flight';
-
+import { handler as getAllFlightsHandler } from '../api/flights/get-all-flights';
 const router = Router();
-const flightsController = new FlightsController();
 
 // GET /api/flights
-router.get('/', (req, res) => flightsController.execute(req, res));
+router.get('/', (req, res) => getAllFlightsHandler(req, res));
 
 // POST /api/flights
 router.post('/', (req, res) => createFlightHandler(req, res));
