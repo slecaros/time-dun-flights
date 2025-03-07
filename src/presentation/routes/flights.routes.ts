@@ -4,7 +4,7 @@ import { handler as getAllFlightsHandler } from '../api/flights/get-all-flights'
 import { handler as getFlightHandler } from '../api/flights/get-flight';
 import { handler as updateFlightPassengerHandler } from '../api/flights/update-flight-passenger';
 import { handler as removeFlightPassengerHandler } from '../api/flights/remove-flight-passenger';
-
+import { handler as deleteFlightHandler } from '../api/flights/delete-flight';
 const router = Router();
 
 // GET /api/flights
@@ -21,5 +21,8 @@ router.put('/:flightCode/passengers/:passengerId', (req, res) => updateFlightPas
 
 // DELETE /api/flights/:flightCode/passengers/:passengerId
 router.delete('/:flightCode/passengers/:passengerId', (req, res) => removeFlightPassengerHandler(req, res));
+
+// DELETE /api/flights/:flightCode
+router.delete('/:flightCode', (req, res) => deleteFlightHandler(req, res));
 
 export default router; 
