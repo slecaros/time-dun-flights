@@ -1,5 +1,5 @@
-import { updateFlightPassengerUseCase } from "../../../domain/use-cases/update-flight-passenger.use-case";
 import { Request, Response } from 'express';
+import { updateFlightPassengerUseCase } from '../../../domain/use-cases/update-flight-passenger.use-case';
 
 export const handler = async (req: Request, res: Response) => {
   const { flightCode, passengerId } = req.params;
@@ -7,8 +7,8 @@ export const handler = async (req: Request, res: Response) => {
 
   const flight = await updateFlightPassengerUseCase({
     flightCode,
-    passengerId: parseInt(passengerId),
-    passenger
+    passengerId: parseInt(passengerId, 10),
+    passenger,
   });
 
   res.status(200).json(flight);

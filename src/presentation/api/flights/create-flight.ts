@@ -1,5 +1,5 @@
+import { Request, Response } from 'express';
 import { createFlightUseCase } from '../../../domain/use-cases/create-flight.use-case';
-import { Request, Response, NextFunction } from 'express';
 
 export const handler = async (req: Request, res: Response) => {
   const { flightCode, passengers } = req.body;

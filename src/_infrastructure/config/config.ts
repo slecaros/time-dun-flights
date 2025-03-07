@@ -10,4 +10,4 @@ const config = {
   mongodbUri: process.env.MONGODB_URI || 'mongodb://localhost:27017/time-dun-flights',
 };
 
-export default config; 
+export default config;

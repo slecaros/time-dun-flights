@@ -1,7 +1,5 @@
-import { FlightRepository } from "../../data/repositories/flight.repository";
+import { FlightRepository } from '../../data/repositories/flight.repository';
 
 const flightRepository = FlightRepository;
 
-export const getAllFlightsUseCase = async () => {
-  return flightRepository.getAll();
-};
+export const getAllFlightsUseCase = async () => flightRepository.getAll();
