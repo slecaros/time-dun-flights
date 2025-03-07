@@ -1,0 +1,11 @@
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Node modules
+node_modules/*
+
+# Dist
+dist/*
