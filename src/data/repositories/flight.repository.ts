@@ -1,6 +1,6 @@
-import { FlightModel } from "@data/models/flight.model";
-import { Flight } from "@domain/entities/flight.entity";
-import { Passenger } from "@domain/entities/passenger.entity";
+import { FlightModel } from "../models/flight.model";
+import { Flight } from "../../domain/entities/flight.entity";
+import { Passenger } from "../../domain/entities/passenger.entity";
 
 
 export interface FlightRepositoryInterface {

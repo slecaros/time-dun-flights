@@ -1,5 +1,5 @@
-import { Flight } from '@domain/entities/flight.entity';
-import { Passenger } from '@domain/entities/passenger.entity';
+import { Flight } from '../../domain/entities/flight.entity';
+import { Passenger } from '../../domain/entities/passenger.entity';
 import { Schema, model } from 'mongoose';
 
 const PassengerSchema = new Schema<Passenger>(
