@@ -6,6 +6,10 @@ export interface FlightRepositoryInterface {
   getAll: () => Promise<Flight[]>;
   getByFlightCode: (flightCode: string) => Promise<Flight | null>;
   create: (flight: Omit<Flight, 'createdAt' | 'updatedAt'>) => Promise<Flight>;
+  addPassengers: (params: {
+    flightCode: string;
+    passengers: Passenger[];
+  }) => Promise<Flight | null>;
   updatePassenger: (params: {
     search: { flightCode: string; passengerId: number };
     update: { passenger: Partial<Omit<Passenger, 'id'>> };
@@ -29,6 +33,16 @@ export const FlightRepository: FlightRepositoryInterface = {
   create: async (flight) => {
     const newFlight = await FlightModel.create(flight);
     return newFlight.toJSON<Flight>();
+  },
+
+  addPassengers: async ({ flightCode, passengers }) => {
+    const flight = await FlightModel.findOneAndUpdate(
+      { flightCode },
+      { $push: { passengers } },
+      { new: true },
+    );
+
+    return flight ? flight.toJSON<Flight>() : null;
   },
 
   updatePassenger: async ({ search: { flightCode, passengerId }, update: { passenger } }) => {
