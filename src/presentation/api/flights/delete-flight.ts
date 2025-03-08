@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { validateRequest } from '../../../_infrastructure/libs/endpoint-validator/validate-request';
 import { deleteFlightUseCase } from '../../../domain/use-cases/delete-flight.use-case';
+import { createEndpointHandler } from '../../../_infrastructure/libs/endpoint-handler/endpoint-handler';
 
 const requestSchema = z.object({
   params: z.object({
@@ -8,9 +9,8 @@ const requestSchema = z.object({
   }),
 });
 
-export const handler = validateRequest(requestSchema, async (validatedData, _req, res) => {
-  const { flightCode } = validatedData.params;
-  const flight = await deleteFlightUseCase({ flightCode });
+const deleteFlightHandler = validateRequest(requestSchema, async ({ params: { flightCode } }) =>
+  deleteFlightUseCase({ flightCode }),
+);
 
-  res.status(200).json(flight);
-});
+export const endpointHandler = createEndpointHandler(deleteFlightHandler);

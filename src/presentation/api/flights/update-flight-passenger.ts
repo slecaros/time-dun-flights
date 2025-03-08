@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { updateFlightPassengerUseCase } from '../../../domain/use-cases/update-flight-passenger.use-case';
 import { validateRequest } from '../../../_infrastructure/libs/endpoint-validator/validate-request';
+import { createEndpointHandler } from '../../../_infrastructure/libs/endpoint-handler/endpoint-handler';
 
 const requestSchema = z.object({
   params: z.object({
@@ -21,15 +22,14 @@ const requestSchema = z.object({
   }),
 });
 
-export const handler = validateRequest(requestSchema, async (validatedData, _req, res) => {
-  const { flightCode, passengerId } = validatedData.params;
-  const { passenger } = validatedData.body;
+const updateFlightPassengerHandler = validateRequest(
+  requestSchema,
+  async ({ params: { flightCode, passengerId }, body: { passenger } }) =>
+    updateFlightPassengerUseCase({
+      flightCode,
+      passengerId: parseInt(passengerId, 10),
+      passenger,
+    }),
+);
 
-  const flight = await updateFlightPassengerUseCase({
-    flightCode,
-    passengerId: parseInt(passengerId, 10),
-    passenger,
-  });
-
-  res.status(200).json(flight);
-});
+export const endpointHandler = createEndpointHandler(updateFlightPassengerHandler);

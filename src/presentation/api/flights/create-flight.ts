@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { createFlightUseCase } from '../../../domain/use-cases/create-flight.use-case';
 import { validateRequest } from '../../../_infrastructure/libs/endpoint-validator/validate-request';
+import { createEndpointHandler } from '../../../_infrastructure/libs/endpoint-handler/endpoint-handler';
 
 const passengerSchema = z.object({
   id: z.number(),
@@ -19,13 +20,9 @@ const requestSchema = z.object({
   }),
 });
 
-export const handler = validateRequest(requestSchema, async (validatedData, _req, res) => {
-  // Extract validated data
-  const { flightCode, passengers } = validatedData.body;
+const createFlightHandler = validateRequest(
+  requestSchema,
+  async ({ body: { flightCode, passengers } }) => createFlightUseCase({ flightCode, passengers }),
+);
 
-  // Call use case with validated data
-  const flight = await createFlightUseCase({ flightCode, passengers });
-
-  // Return successful response
-  res.status(201).json(flight);
-});
+export const endpointHandler = createEndpointHandler(createFlightHandler);

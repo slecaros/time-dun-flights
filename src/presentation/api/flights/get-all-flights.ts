@@ -1,11 +1,10 @@
 import { z } from 'zod';
 import { validateRequest } from '../../../_infrastructure/libs/endpoint-validator/validate-request';
 import { getAllFlightsUseCase } from '../../../domain/use-cases/get-all-flights.use-case';
+import { createEndpointHandler } from '../../../_infrastructure/libs/endpoint-handler/endpoint-handler';
 
 const requestSchema = z.object({});
 
-export const handler = validateRequest(requestSchema, async (_validatedData, _req, res) => {
-  const flights = await getAllFlightsUseCase();
+const getAllFlightsHandler = validateRequest(requestSchema, async () => getAllFlightsUseCase());
 
-  res.status(200).json(flights);
-});
+export const endpointHandler = createEndpointHandler(getAllFlightsHandler);
