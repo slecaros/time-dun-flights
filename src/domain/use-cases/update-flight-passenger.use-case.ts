@@ -1,3 +1,4 @@
+import { ClientError, ERROR_CODES } from '../../_infrastructure/libs/errors';
 import { Passenger } from '../entities/passenger.entity';
 import { FlightRepository } from '../../data/repositories/flight.repository';
 
@@ -18,7 +19,10 @@ export const updateFlightPassengerUseCase = async ({
   });
 
   if (!flight) {
-    throw new Error('Flight not found or passenger not found');
+    throw new ClientError({
+      message: `Passenger not found with id ${passengerId} in flight ${flightCode}`,
+      errorCode: ERROR_CODES.NOT_FOUND,
+    });
   }
 
   return flight;

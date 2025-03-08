@@ -1,3 +1,4 @@
+import { ClientError, ERROR_CODES } from '../../_infrastructure/libs/errors';
 import { FlightRepository } from '../../data/repositories/flight.repository';
 
 const flightRepository = FlightRepository;
@@ -12,7 +13,10 @@ export const removeFlightPassengerUseCase = async ({
   const flight = await flightRepository.removePassenger({ flightCode, passengerId });
 
   if (!flight) {
-    throw new Error('Flight not found or passenger not found');
+    throw new ClientError({
+      message: `Passenger not found with id ${passengerId} in flight ${flightCode}`,
+      errorCode: ERROR_CODES.NOT_FOUND,
+    });
   }
 
   return flight;

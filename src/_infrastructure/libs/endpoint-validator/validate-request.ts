@@ -1,5 +1,6 @@
 import { Request } from 'express';
 import { AnyZodObject, z } from 'zod';
+import { ERROR_CODES, ValidationError } from '../errors';
 
 // Define a type for the validated request data
 type ValidatedRequest<T extends AnyZodObject> = z.infer<T>;
@@ -26,5 +27,8 @@ export const validateRequest =
       return handler(validatedData.data);
     }
 
-    throw new Error(validatedData.error.message);
+    throw new ValidationError({
+      message: validatedData.error.message,
+      errorCode: ERROR_CODES.VALIDATION_ERROR,
+    });
   };
