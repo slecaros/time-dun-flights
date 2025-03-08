@@ -5,6 +5,7 @@ import { endpointHandler as getFlightEndpointHandler } from '../api/flights/get-
 import { endpointHandler as updateFlightPassengerEndpointHandler } from '../api/flights/update-flight-passenger';
 import { endpointHandler as removeFlightPassengerEndpointHandler } from '../api/flights/remove-flight-passenger';
 import { endpointHandler as deleteFlightEndpointHandler } from '../api/flights/delete-flight';
+import { endpointHandler as addFlightPassengersEndpointHandler } from '../api/flights/add-flight-pessengers';
 
 const router = Router();
 
@@ -17,8 +18,11 @@ router.post('/', createFlightEndpointHandler);
 // GET /api/flights/:flightCode
 router.get('/:flightCode', getFlightEndpointHandler);
 
-// PUT /api/flights/:flightCode/passengers/:passengerId
-router.put('/:flightCode/passengers/:passengerId', updateFlightPassengerEndpointHandler);
+// POST /api/flights/:flightCode/passengers
+router.post('/:flightCode/passengers', addFlightPassengersEndpointHandler);
+
+// PATCH /api/flights/:flightCode/passengers/:passengerId
+router.patch('/:flightCode/passengers/:passengerId', updateFlightPassengerEndpointHandler);
 
 // DELETE /api/flights/:flightCode/passengers/:passengerId
 router.delete('/:flightCode/passengers/:passengerId', removeFlightPassengerEndpointHandler);
