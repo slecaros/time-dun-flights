@@ -12,7 +12,6 @@ export const errorHandler = (
   _next: NextFunction,
 ): void => {
   const statusCode = err.statusCode || 500;
-  console.log('Im an error in the app');
 
   res.status(statusCode).json({
     status: 'error',
