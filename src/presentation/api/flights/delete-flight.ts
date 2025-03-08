@@ -1,9 +1,16 @@
-import { Request, Response } from 'express';
+import { z } from 'zod';
+import { validateRequest } from '../../../_infrastructure/libs/endpoint-validator/validate-request';
 import { deleteFlightUseCase } from '../../../domain/use-cases/delete-flight.use-case';
 
-export const handler = async (req: Request, res: Response) => {
-  const { flightCode } = req.params;
+const requestSchema = z.object({
+  params: z.object({
+    flightCode: z.string().min(1, 'Flight code is required'),
+  }),
+});
+
+export const handler = validateRequest(requestSchema, async (validatedData, _req, res) => {
+  const { flightCode } = validatedData.params;
   const flight = await deleteFlightUseCase({ flightCode });
 
   res.status(200).json(flight);
-};
+});
