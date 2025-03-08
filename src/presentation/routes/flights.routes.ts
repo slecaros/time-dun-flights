@@ -9,25 +9,21 @@ import { handler as deleteFlightHandler } from '../api/flights/delete-flight';
 const router = Router();
 
 // GET /api/flights
-router.get('/', (req, res) => getAllFlightsHandler(req, res));
+router.get('/', getAllFlightsHandler);
 
 // POST /api/flights
-router.post('/', (req, res) => createFlightHandler(req, res));
+router.post('/', createFlightHandler);
 
 // GET /api/flights/:flightCode
-router.get('/:flightCode', (req, res) => getFlightHandler(req, res));
+router.get('/:flightCode', getFlightHandler);
 
 // PUT /api/flights/:flightCode/passengers/:passengerId
-router.put('/:flightCode/passengers/:passengerId', (req, res) =>
-  updateFlightPassengerHandler(req, res),
-);
+router.put('/:flightCode/passengers/:passengerId', updateFlightPassengerHandler);
 
 // DELETE /api/flights/:flightCode/passengers/:passengerId
-router.delete('/:flightCode/passengers/:passengerId', (req, res) =>
-  removeFlightPassengerHandler(req, res),
-);
+router.delete('/:flightCode/passengers/:passengerId', removeFlightPassengerHandler);
 
 // DELETE /api/flights/:flightCode
-router.delete('/:flightCode', (req, res) => deleteFlightHandler(req, res));
+router.delete('/:flightCode', deleteFlightHandler);
 
 export default router;

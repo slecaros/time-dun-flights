@@ -48,9 +48,6 @@ export const validateRequest =
         return;
       }
 
-      // Handle other errors
-      console.error('Request handler error:', error);
-
       // If the error has a statusCode property, use it
       const errorObj = error as ApiError;
       const statusCode = errorObj.statusCode || 500;
