@@ -6,10 +6,10 @@ A TypeScript REST API built with Express and MongoDB, following Clean Architectu
 
 The project follows Clean Architecture with the following layers:
 
-- **Domain**: Contains business logic, entities, interfaces, and use cases
+- **\_Infrastructure**: Contains configuration, database connection, middlewares and some custom libs
 - **Data**: Implements repositories and data models
-- **Presentation**: Contains controllers and routes
-- **Infrastructure**: Contains configuration, database connection, and middlewares
+- **Domain**: Contains business logic, entities, and use-cases
+- **Presentation**: Contains routes an the controllers/handlers
 
 ## Prerequisites
 
@@ -44,10 +44,6 @@ npm install
 ```bash
 npm run dev
 ```
-
-## Available Endpoints
-
-- `GET /api/health-check`: Check if the API is running
 
 ## Available Scripts
 
