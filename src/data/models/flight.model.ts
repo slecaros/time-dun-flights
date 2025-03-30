@@ -18,6 +18,7 @@ const PassengerSchema = new Schema<Passenger>(
 const FlightSchema = new Schema<Flight>(
   {
     flightCode: { type: String, required: true, unique: true },
+    capacity: { type: Number, required: true },
     passengers: { type: [PassengerSchema], default: [] },
   },
   { timestamps: true },

@@ -17,12 +17,14 @@ const requestSchema = z.object({
   body: z.object({
     flightCode: z.string().optional(),
     passengers: z.array(passengerSchema),
+    capacity: z.number().int().min(1, 'Capacity must be a positive number'),
   }),
 });
 
 const createFlightHandler = validateRequest(
   requestSchema,
-  async ({ body: { flightCode, passengers } }) => createFlightUseCase({ flightCode, passengers }),
+  async ({ body: { flightCode, passengers, capacity } }) =>
+    createFlightUseCase({ flightCode, passengers, capacity }),
 );
 
 export const endpointHandler = createEndpointHandler(createFlightHandler);
